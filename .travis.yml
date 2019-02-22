@@ -36,11 +36,14 @@ before_script:
   - sudo ln -s /usr/bin/swig3.0 /usr/bin/swig
   - swig -version
   # Annoying workarounds #2
-  - yes | sdkmanager "platforms;android-27"
-  - curl -L https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip -O
-  - unzip -q android-ndk-r16b-linux-x86_64.zip 
-  - rm android-ndk-r16b-linux-x86_64.zip
-  - export ANDROID_NDK_HOME=`pwd`/android-ndk-r16b
-  - export LOCAL_ANDROID_NDK_HOME="$ANDROID_NDK_HOME"
+  - yes | sdkmanager --licenses
+  - sdkmanager --install 'build-tools;28.0.2' \
+        'ndk-bundle' \
+        'extras;android;m2repository' \
+        'patcher;v4' \
+        'platform-tools' \
+        'platforms;android-28' \
+        'tools'
+
   - export PATH=$PATH:${ANDROID_NDK_HOME}
 
